@@ -23,7 +23,7 @@ Made as minimally as I could, without any dependencies.
 
 - [X] Internal value holder, `value()`, `hasValue()`, `some` & `none`
 - [X] Method `valueOr()` & tests `optional-base.test.ts`
-- [ ] Method `reset()`
+- [X] Method `reset()`
 - [ ] Method `wrap()`
 - [ ] Method `emplace()` (necessary?)
 - [ ] Tests `optional-modif.test.ts` (reset, wrap, emplace)

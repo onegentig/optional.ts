@@ -9,7 +9,7 @@ test('Empty optional has no value', t => {
      t.false(optDirect.hasValue());
 });
 
-test('Optional with a value has a value and exactly that value', t => {
+test('Non-empty optional has a value and exactly that set value', t => {
      const optNew = new Optional<number>(42);
      t.true(optNew.hasValue());
      t.is(optNew.value(), 42);
@@ -27,7 +27,7 @@ test('Empty optional throws an error when accessing its value', t => {
      t.throws(() => optDirect.value());
 });
 
-test('Mutable optional can be given a value by reassigning', t => {
+test('Mutable optional can be given a new value by reassigning', t => {
      let opt = Optional.none<number>();
      t.false(opt.hasValue());
 
@@ -36,26 +36,15 @@ test('Mutable optional can be given a value by reassigning', t => {
      t.is(opt.value(), 42);
 });
 
-test('Mutable optional can be reset or reassigned to have no value', t => {
+test('Mutable optional can be reassigned to have no value', t => {
      let opt = some(42);
      t.true(opt.hasValue());
-
-     opt.reset();
-     t.false(opt.hasValue());
 
      opt = none;
      t.false(opt.hasValue());
 });
 
-test('Immutable optional can be reset to have no value', t => {
-     const opt = some(42);
-     t.true(opt.hasValue());
-
-     opt.reset();
-     t.false(opt.hasValue());
-});
-
-test('valueOr() returns the Optional’s value, if it has one', t => {
+test('valueOr() on non-empty optional returns its value', t => {
      const optNum = some(42);
      t.is(optNum.valueOr(0), 42);
 
@@ -63,7 +52,7 @@ test('valueOr() returns the Optional’s value, if it has one', t => {
      t.is(optStr.valueOr('nazdar'), 'ahoj');
 });
 
-test('valueOr() returns the default value if the Optional has no value', t => {
+test('valueOr() on empty optional returns the parameter value', t => {
      const opt = none;
      t.is(opt.valueOr(42), 42);
      t.is(opt.valueOr('ahoj'), 'ahoj');
