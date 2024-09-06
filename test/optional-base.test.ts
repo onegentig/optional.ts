@@ -54,3 +54,17 @@ test('Immutable optional can be reset to have no value', t => {
      opt.reset();
      t.false(opt.hasValue());
 });
+
+test('valueOr() returns the Optional’s value, if it has one', t => {
+     const optNum = some(42);
+     t.is(optNum.valueOr(0), 42);
+
+     const optStr = some('ahoj');
+     t.is(optStr.valueOr('nazdar'), 'ahoj');
+});
+
+test('valueOr() returns the default value if the Optional has no value', t => {
+     const opt = none;
+     t.is(opt.valueOr(42), 42);
+     t.is(opt.valueOr('ahoj'), 'ahoj');
+});

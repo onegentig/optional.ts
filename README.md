@@ -22,7 +22,7 @@ Made as minimally as I could, without any dependencies.
 ## TODO
 
 - [X] Internal value holder, `value()`, `hasValue()`, `some` & `none`
-- [ ] Method `valueOr()` & tests `optional-base.test.ts`
+- [X] Method `valueOr()` & tests `optional-base.test.ts`
 - [ ] Method `reset()`
 - [ ] Method `wrap()`
 - [ ] Method `emplace()` (necessary?)
@@ -39,7 +39,7 @@ Made as minimally as I could, without any dependencies.
 ## Licence
 
 <img
-     alt="MIT-emblemo"
+     alt="MIT-emblem"
      src=".github/mit.png"
      width="15%" />
 
