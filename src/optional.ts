@@ -1,4 +1,4 @@
-import { OptionalAccessError } from './optional-error';
+import { OptionalAccessError } from './optional-error.js';
 
 /**
  * @brief Class that representing a value that may or may not be there.
@@ -11,11 +11,11 @@ import { OptionalAccessError } from './optional-error';
  */
 export class Optional<T> {
      /** @brief The value that may or may not be here. */
-     private v: T | null;
+     private _value: T | null;
 
      /** @brief Constructs an optional object */
      constructor (value?: T | null) {
-          this.v = value ?? null;
+          this._value = value ?? null;
      }
 
      /**
@@ -34,12 +34,17 @@ export class Optional<T> {
           return new Optional<T>(value);
      }
 
+     /** @brief Removes the contained value */
+     public reset (): void {
+          this._value = null;
+     }
+
      /**
       * @brief Checks whether the object contains a value
       * @returns `true` if contains value, `false` otherwise
       */
      public hasValue (): boolean {
-          return this.v !== null;
+          return this._value !== null;
      }
 
      /**
@@ -48,11 +53,11 @@ export class Optional<T> {
       * @throws {@link OptionalAccessError} if there is no value
       */
      public value (): T {
-          if (this.v === null)
+          if (this._value === null)
                throw new OptionalAccessError(
                     'Optional object does not contain a value'
                );
-          return this.v;
+          return this._value;
      }
 
      /**
@@ -62,11 +67,11 @@ export class Optional<T> {
       * @returns The value if available, `default` otherwise
       */
      public valueOr (defaultValue: T) {
-          return this.v ?? defaultValue;
+          return this._value ?? defaultValue;
      }
 }
 
 /* Some re-exports for convenience */
 
-export const none = Optional.none();
+export const none: Optional<any> = Optional.none();
 export const some = Optional.some;
