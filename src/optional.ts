@@ -55,7 +55,7 @@ export class Optional<T> {
      public value (): T {
           if (this._value === null)
                throw new OptionalAccessError(
-                    'Optional object does not contain a value'
+                    'Optional object does not contain a value',
                );
           return this._value;
      }
@@ -69,9 +69,23 @@ export class Optional<T> {
      public valueOr (defaultValue: T) {
           return this._value ?? defaultValue;
      }
+
+     /**
+      * @brief Swaps the contained value with another optional object
+      * @param other Other optional object
+      * @note In C++, `swap()` fails if either object is immutable (const).
+      *       Here, swapping values of two constant Optional objects is
+      *       possible. I don’t know how to prevent it.
+      */
+     public swap (other: Optional<T>): void {
+          [ this._value, other._value ] = [ other._value, this._value ];
+     }
+
+     public static nullopt: Optional<any> = Optional.none(); // C++ shorthand
 }
 
 /* Some re-exports for convenience */
 
-export const none: Optional<any> = Optional.none();
 export const some = Optional.some;
+export const none: Optional<any> = Optional.none();
+export const nullopt = Optional.nullopt;

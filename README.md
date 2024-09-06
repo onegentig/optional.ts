@@ -24,13 +24,13 @@ Made as minimally as I could, without any dependencies.
 - [X] Internal value holder, `value()`, `hasValue()`, `some` & `none`
 - [X] Method `valueOr()` & tests `optional-base.test.ts`
 - [X] Method `reset()`
-- [ ] Method `wrap()`
+- [X] Method `swap()`
 - [ ] Method `emplace()` (necessary?)
-- [ ] Tests `optional-modif.test.ts` (reset, wrap, emplace)
+- [ ] Tests `optional-mod.test.ts` (reset, swap, emplace)
 - [ ] Method `transform()`
 - [ ] Method `andThen()`
 - [ ] Method `orElse()`
-- [ ] Tests `optional-monadic.test.ts` (transform, andThen, orElse)
+- [ ] Tests `optional-mon.test.ts` (transform, andThen, orElse)
 - [ ] NPM package 0.?
 - [ ] Tests from cppreference examples
 - [ ] NPM package 1.0
