@@ -25,8 +25,8 @@ Made as minimally as I could, without any dependencies.
 - [X] Method `valueOr()` & tests `optional-base.test.ts`
 - [X] Method `reset()`
 - [X] Method `swap()`
-- [ ] Method `emplace()` (necessary?)
-- [ ] Tests `optional-mod.test.ts` (reset, swap, emplace)
+- [ ] ~~Method `emplace()`~~ *not possible*
+- [X] Tests `optional-mod.test.ts` (reset, swap, ~~emplace~~)
 - [ ] Method `transform()`
 - [ ] Method `andThen()`
 - [ ] Method `orElse()`

@@ -31,16 +31,16 @@ test('Mutable optional can be given a new value by reassigning', t => {
      let opt = Optional.none<number>();
      t.false(opt.hasValue());
 
-     opt = some(42);
+     opt = Optional.some(42);
      t.true(opt.hasValue());
      t.is(opt.value(), 42);
 });
 
 test('Mutable optional can be reassigned to have no value', t => {
-     let opt = some(42);
+     let opt = Optional.some(42);
      t.true(opt.hasValue());
 
-     opt = none;
+     opt = Optional.none();
      t.false(opt.hasValue());
 });
 
