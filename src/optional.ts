@@ -26,17 +26,14 @@ export class Optional<T> {
           return new Optional<T>(null);
      }
 
+     public static nullopt: Optional<any> = Optional.none(); // C++ shorthand
+
      /**
       * @brief Creates an optional object with a value.
       * @param value The value
       */
      public static some<T> (value: T): Optional<T> {
           return new Optional<T>(value);
-     }
-
-     /** @brief Removes the contained value */
-     public reset (): void {
-          this._value = null;
      }
 
      /**
@@ -70,6 +67,13 @@ export class Optional<T> {
           return this._value ?? defaultValue;
      }
 
+     /* == Modifiers == */
+
+     /** @brief Removes the contained value */
+     public reset (): void {
+          this._value = null;
+     }
+
      /**
       * @brief Swaps the contained value with another optional object
       * @param other Other optional object
@@ -81,11 +85,10 @@ export class Optional<T> {
           [ this._value, other._value ] = [ other._value, this._value ];
      }
 
-     public static nullopt: Optional<any> = Optional.none(); // C++ shorthand
 }
 
 /* Some re-exports for convenience */
 
 export const some = Optional.some;
-export const none: Optional<any> = Optional.none();
+export const none = Optional.none;
 export const nullopt = Optional.nullopt;

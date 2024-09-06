@@ -53,7 +53,7 @@ test('valueOr() on non-empty optional returns its value', t => {
 });
 
 test('valueOr() on empty optional returns the parameter value', t => {
-     const opt = none;
+     const opt = none();
      t.is(opt.valueOr(42), 42);
      t.is(opt.valueOr('ahoj'), 'ahoj');
 });
