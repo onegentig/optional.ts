@@ -36,6 +36,8 @@ export class Optional<T> {
           return new Optional<T>(value);
      }
 
+     /* == Observers == */
+
      /**
       * @brief Checks whether the object contains a value
       * @returns `true` if contains value, `false` otherwise
@@ -85,6 +87,43 @@ export class Optional<T> {
           [ this._value, other._value ] = [ other._value, this._value ];
      }
 
+     /* == Monadic operations == */
+
+     /**
+      * @brief Calls the given Optional-returning function if there is a value
+      *        and returns its result; if there is no value,
+      *        returns Option.none().
+      * @param fn Function to invoke (must return Optional<*>)
+      * @returns Optional result of the function or nullopt
+      */
+     public andThen<U> (fn: (value: T) => Optional<U>): Optional<U> {
+          if (this._value === null) return Optional.none<U>();
+          return fn(this._value);
+     }
+
+     /**
+      * @brief Calls the given function if there is a value
+      *        and returns the result wrapped in an Optional<>;
+      *        if there is no value, returns Option.none().
+      * @param fn Function to invoke
+      * @returns Optional result of the function or nullopt
+      */
+     public transform<U> (fn: (value: T) => U): Optional<U> {
+          if (this._value === null) return Optional.none<U>();
+          return Optional.some(fn(this._value));
+     }
+
+     /**
+      * @brief Calls the given Optional-returning function if there is NO value
+      *        and returns the result wrapped in an Optional<>;
+      *        if there is a value, returns self.
+      * @param fn Function to invoke (must return Optional<*>)
+      * @returns Optional result of the function or Optional self
+      */
+     public orElse (fn: () => Optional<T>): Optional<T> {
+          if (this._value === null) return fn();
+          return this;
+     }
 }
 
 /* Some re-exports for convenience */
