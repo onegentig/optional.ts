@@ -58,6 +58,9 @@ You can change the value, of course:
 ```typescript
 var opt = Optional.some(2024);
 opt = Optional.some(2025);
+
+// ..or as of 1.1.0 with a method:
+opt.assign(2026);
 ```
 
 …and even remove it:
@@ -68,9 +71,9 @@ opt = Optional.none();
 opt = Optional.nullopt; // equivalent to Optional.none()
 ```
 
-Do mind that this doesn’t clear the var’s type. The variable is still
-`Optional<number>`, even if valueless. It will ever contain only a number
-or nothing at all.
+Do mind that this doesn’t clear the variable type. The variable is still
+`Optional<number>`, even if `nullopt`. It will ever contain only a number
+or nothing.
 
 ### Typeless declaration
 
@@ -131,10 +134,14 @@ C++:
 | Function | Return Type | Description |
 | :-----------------------------------: | :-------: | :------------------------------------------------------------------------------: |
 | `Optional.reset()` | `void` | Removes the contained value |
+| `Optional.assign()` | `void` | Assigns a new contained value |
 | `Optional.swap(other: Optional<T>)` | `void` | Swaps values of same-type Optionals |
 
 C++ also has [`emplace()`](https://en.cppreference.com/w/cpp/utility/optional/emplace),
-but as types in TS cannot be used to construct instances, I decided just to skip it.
+but TS types cannot be used to make new instances, as far as I know.
+
+`assign()` is also deviance from `std::optional`, but I chose to add it, as TS/JS
+does not allow operator overloading.
 
 #### Monadic Operations
 
