@@ -77,6 +77,16 @@ export class Optional<T> {
      }
 
      /**
+      * @brief Assigns a new value to the object
+      * @param value The new value
+      * @note This is a deviation from `std::optional`, but a compromise
+      *       for the fact that JS/TS does not allow operator overloading.
+      */
+     public assign (value: T): void {
+          this._value = value;
+     }
+
+     /**
       * @brief Swaps the contained value with another optional object
       * @param other Other optional object
       * @note In C++, `swap()` fails if either object is immutable (const).

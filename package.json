@@ -4,7 +4,7 @@
      "author": "onegen (https://github.com/onegentig)",
      "repository": "github:onegentig/optional.ts",
      "license": "MIT",
-     "version": "1.0.0",
+     "version": "1.1.0",
      "type": "module",
      "main": "dist/optional.js",
      "types": "dist/optional.d.ts",
