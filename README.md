@@ -133,15 +133,22 @@ C++:
 
 | Function | Return Type | Description |
 | :-----------------------------------: | :-------: | :------------------------------------------------------------------------------: |
-| `Optional.reset()` | `void` | Removes the contained value |
-| `Optional.assign()` | `void` | Assigns a new contained value |
-| `Optional.swap(other: Optional<T>)` | `void` | Swaps values of same-type Optionals |
+| `Optional.reset()` | `this` | Removes the contained value |
+| `Optional.assign()` | `this` | Assigns a new contained value |
+| `Optional.swap(other: Optional<T>)` | `this` | Swaps values of same-type Optionals |
 
 C++ also has [`emplace()`](https://en.cppreference.com/w/cpp/utility/optional/emplace),
 but TS types cannot be used to make new instances, as far as I know.
 
 `assign()` is also deviance from `std::optional`, but I chose to add it, as TS/JS
 does not allow operator overloading.
+
+Also, all modifier methods return themselves (`this`) to allow chaining.
+
+```ts
+var opt = Optional.some(2024);
+opt.reset().assign(2025).reset();
+```
 
 #### Monadic Operations
 

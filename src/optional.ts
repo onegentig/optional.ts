@@ -71,9 +71,13 @@ export class Optional<T> {
 
      /* == Modifiers == */
 
-     /** @brief Removes the contained value */
-     public reset (): void {
+     /**
+      * @brief Removes the contained value
+      * @returns The optional object itself
+      */
+     public reset (): Optional<T> {
           this._value = null;
+          return this;
      }
 
      /**
@@ -82,19 +86,19 @@ export class Optional<T> {
       * @note This is a deviation from `std::optional`, but a compromise
       *       for the fact that JS/TS does not allow operator overloading.
       */
-     public assign (value: T): void {
+     public assign (value: T): Optional<T> {
           this._value = value;
+          return this;
      }
 
      /**
       * @brief Swaps the contained value with another optional object
       * @param other Other optional object
-      * @note In C++, `swap()` fails if either object is immutable (const).
-      *       Here, swapping values of two constant Optional objects is
-      *       possible. I don’t know how to prevent it.
+      * @returns The optional object itself
       */
-     public swap (other: Optional<T>): void {
+     public swap (other: Optional<T>): Optional<T> {
           [ this._value, other._value ] = [ other._value, this._value ];
+          return this;
      }
 
      /* == Monadic operations == */
