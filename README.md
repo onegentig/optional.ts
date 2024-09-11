@@ -1,5 +1,9 @@
 # @onegen/optional
 
+[
+     ![NPM Downloads](https://img.shields.io/npm/d18m/%40onegen%2Foptional?style=for-the-badge&logo=npm&label=Downloads)
+](https://www.npmjs.com/package/@onegen/optional)
+
 `Optional` utility class in TypeScript, based on C++
 [`std::optional`](https://en.cppreference.com/w/cpp/utility/optional).
 
@@ -10,23 +14,24 @@ Guess it’s mostly done unless I find some mistake or something. 🤷🏼‍♂
 ```ts
 import { Optional } from "@onegen/optional";
 
-function safeDiv (x: number, y: number): Optional<number> {
+function saferDiv (x: number, y: number): Optional<number> {
      if (y === 0) return Optional.nullopt;
      return Optional.some(x / y);
 }
 
-var result = safeDiv(2, 0);
+var result = saferDiv(2, 0);
 if (!result.hasValue())
-     console.log('Dividing be zero again, you dummy?');
+     console.log('Dividing by zero again, you dummy?');
 else
-     console.log('Result:', result.value());
+     console.log('It’s ', result.value(), '!');
 ```
 
 `Optional` is a wrapper helper class around a value that may or may not
 be defined. Instead of returning some arbitrary value (like -1),
 `null` or throwing an error, `Optional` can be returned, prompting you
 – the dev – to first check if there is any value before actually using it
-in a fun and type safe manner! Look, it’s not for everyone, but I like it, OK?
+in a fun and type safe manner! \
+Look, it’s not for everyone, but I like it.
 
 ## Working with `Optional`s
 
@@ -53,21 +58,18 @@ var opt = Optional.some(2024);
 opt = Optional.some('2024'); // TS won’t let you do this!
 ```
 
-You can change the value, of course:
+While you can’t change the type, you can, of course, change the value:
 
 ```typescript
-var opt = Optional.some(2024);
-opt = Optional.some(2025);
-
-// ..or as of 1.1.0 with a method:
-opt.assign(2026);
+opt.assign(2026); // with a method, or
+opt = Optional.some(2025); // by re-assigning
 ```
 
 …and even remove it:
 
 ```typescript
-var opt = Optional.some(2024);
-opt = Optional.none();
+opt.reset(); // with a method, or
+opt = Optional.none(); // by re-assigning
 opt = Optional.nullopt; // equivalent to Optional.none()
 ```
 
@@ -84,16 +86,14 @@ var opt = Optional.none()
 ```
 
 The type of `opt` is `Optional<unknown>` and that is not something you really
-want now. I wish I could somehow forbid this, but oh well. Seriously, don’t
-do that. When making an empty `Optional`, specify its type explicitly, for your
-own sanity:
+want now. I wish I could somehow forbid this. Seriously, don’t do this.
+When making an empty `Optional`, specify its type explicitly, for your
+own sake:
 
 ```typescript
 var opt: Optional<number> = Optional.none();
 var opt = new Optional<number>();
 ```
-
-Both these options work perfectly fine.
 
 ### Base usage
 
@@ -112,12 +112,10 @@ const value = result.value();
 
 Calling `result.value()` while there is no value will lead to an error.
 
-If you want a more comprehensive Rust-like `Result` utility for error handling,
-you might want to take a look at
+This little utility is not attempting to be Rust `Result`. If you want a more
+robust error-handling utility, you might want to take a look at
 [neverthrow](https://github.com/supermacro/neverthrow).
-It has a lot more functionality for error handling, `Optional` is just a simple
-"has value or has no value" wrapper. With a few more functions copied from
-C++:
+Fully recommend (not sponsored).
 
 ### Functions
 
